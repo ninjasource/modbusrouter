@@ -190,6 +190,7 @@ mod tests {
         ];
         let mut buff = Cursor::new(raw);
 
+        // unwrap will panic if read_message returns an Err
         let msg1 = read_message(&mut buff).unwrap();
         assert_eq!(msg1.batt_pid1, 1);
         assert_eq!(msg1.batt_value, 0);
@@ -221,6 +222,11 @@ mod tests {
         assert_eq!(msg2.version_value, 2);
         assert_eq!(msg2.rssi_pid6, 6);
         assert_eq!(msg2.rssi_value, 203);
+
+        // read the next 5 messages and ignore the contents
+        for _ in 0..5 {
+            read_message(&mut buff).unwrap();
+        }
     }
 
     #[test]
