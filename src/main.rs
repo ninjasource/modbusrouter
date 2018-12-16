@@ -169,7 +169,7 @@ mod tests {
     use std::io::Cursor;
 
     #[test]
-    fn real_message_multiple_messages() {
+    fn read_message_multiple_messages() {
         // this byte stream consists of 7 correctly formed messages
         // this test will decode all of them and explicitly check the first two
         let raw = vec![
