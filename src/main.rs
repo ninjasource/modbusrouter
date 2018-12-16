@@ -73,7 +73,7 @@ fn read_message<T: Read>(stream: &mut T) -> Result<DeviceMessage, io::Error> {
         num_bytes += stream.read(&mut buffer[num_bytes..])?;
     }
 
-    // check the start sequence is 0x1900
+    // check that the start sequence is 0x1900
     // slices implement the PartialEq trait so we can call ne function on them (not equal)
     const START_SEQ: [u8; 2] = [0x19, 0x00];
     if buffer[..2].ne(&START_SEQ) {
@@ -121,7 +121,7 @@ fn read_message<T: Read>(stream: &mut T) -> Result<DeviceMessage, io::Error> {
     Ok(message)
 }
 
-// Sends our extracted message to the modbus using the mdbus crate
+// Sends our extracted message to the modbus using the modbus crate
 fn send_message_to_modbus(
     msg: DeviceMessage,
     modbus_client: &mut Transport,
@@ -138,7 +138,8 @@ fn send_message_to_modbus(
     Ok(())
 }
 
-// all the useful information extracted from the tcp stream frame
+// All the useful information extracted from the tcp stream frame.
+// Deriving Debug allows us to print this struct to std out easily
 #[derive(Debug)]
 struct DeviceMessage {
     batt_pid1: u8,
@@ -170,7 +171,7 @@ mod tests {
 
     #[test]
     fn read_message_multiple_messages() {
-        // this byte stream consists of 7 correctly formed messages
+        // this byte stream consists of 7 correctly formed messages.
         // this test will decode all of them and explicitly check the first two
         let raw = vec![
             0x19, 0x00, 0xD0, 0xCF, 0x5E, 0x82, 0x93, 0x7B, 0x12, 0x01, 0x00, 0x02, 0x54, 0x03,
