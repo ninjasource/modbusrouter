@@ -27,7 +27,7 @@ loop {
 }
 ```
 
-If either the read_message or the send_message_to_modbus functions fail then the program exists then inner loop and closes the tcp connection (not the modbus connection). The outer loop ensures that a new TCP connection will then be attempted. It is assumed that the host will send a correctly formated message when a new connection is initiated and not simply continue to send bytes from the last position it originally sent from. If this were the case we would have to search for magic byte strings to synchronise the client and server.
+If either the `read_message()` or the `send_message_to_modbus()` functions fail then the program exists then inner loop and closes the tcp connection (not the modbus connection). The outer loop ensures that a new TCP connection will then be attempted. It is assumed that the host will send a correctly formated message when a new connection is initiated and not simply continue to send bytes from the last position it originally sent from. If this were the case we would have to search for magic byte strings to synchronise the client and server.
 
 
 
