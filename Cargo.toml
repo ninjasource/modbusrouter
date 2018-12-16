@@ -1,0 +1,9 @@
+[package]
+name = "modbusrouter"
+version = "0.1.0"
+authors = ["David Haig <david@david>"]
+edition = "2018"
+
+[dependencies]
+modbus = { git = "https://github.com/hirschenberger/modbus-rs" }
+byteorder = "^1.2.7"
